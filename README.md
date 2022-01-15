@@ -1,5 +1,5 @@
 # FRC2022
-Java files to download are located in "DriveTrainFRC\DriveTrainFRC\src\main\java\frc\robot"
+Java files to download are located in ""src\main\java\frc\robot""
 
 
 **Current Configuration(Joystick)**
