@@ -2,7 +2,7 @@
 Java files to download are located in "DriveTrainFRC\DriveTrainFRC\src\main\java\frc\robot"
 
 
-Current Configuration(Joystick)
+**Current Configuration(Joystick)**
 
 Left Joystick controls robot movement and drivetrain
 
