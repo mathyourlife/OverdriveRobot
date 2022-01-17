@@ -36,8 +36,7 @@ public class TeleopDriveCmd extends CommandBase
   @Override
   public void execute() 
   {
-     teleopDrive.leftJoystick();
-     teleopDrive.rightJoystick();
+    teleopDrive.driveTheBot();
   }
 
   // Called once the command ends or is interrupted.
