@@ -6,70 +6,108 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-
-/** These are the imports for the libraries that this sub system will use */
-
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.Constants;
+//import edu.wpi.first.wpilibj.RobotDrive;
 
 
-  
-public class MyDriveTrain extends SubsystemBase
+public class DrivetrainSubsystem extends SubsystemBase
  {
 
-  // in our robot we have two motors on left
-  private final PWMVictorSPX m_left1 = new PWMVictorSPX(0);
-  private final PWMVictorSPX m_left2 = new PWMVictorSPX(1);
-  SpeedControllerGroup m_left = new SpeedControllerGroup(m_left1, m_left2);
 
-  // in our robot we have two motors on right
-  private final PWMVictorSPX m_right1 = new PWMVictorSPX(2);
-  private final PWMVictorSPX m_right2 = new PWMVictorSPX(3);
-  SpeedControllerGroup m_right = new SpeedControllerGroup(m_right1, m_right2);
+    private final PWMVictorSPX topRightMotor = new PWMVictorSPX(Constants.TOP_RT_MOTOR);
+    private final PWMVictorSPX bottomRightMotor = new PWMVictorSPX(Constants.BOTTOM_RT_MOTOR);
 
-  // we use diffrential drive
-  private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_left, m_right);
+    private final SpeedControllerGroup rightSideWheels = new SpeedControllerGroup(topRightMotor, bottomRightMotor);
 
-  // we use two joysticks.
-  private final Joystick m_stick = new Joystick(0);
-  private final Joystick m_action = new Joystick(1);
-  // Sets Drive joystick port
+    private final PWMVictorSPX topLeftMotor = new PWMVictorSPX(Constants.TOP_LFT_MOTOR);
+    private final PWMVictorSPX bottomLeftMotor = new PWMVictorSPX(Constants.BOTTOM_LFT_MOTOR);
 
-  /** Creates a new MyDriveTrain. */
-  public MyDriveTrain() 
-  {
+    private final SpeedControllerGroup leftSideWheels = new SpeedControllerGroup(topLeftMotor, bottomLeftMotor);
 
-  }
+    private final PWMVictorSPX omniMotor1 = new PWMVictorSPX(Constants.OMNI_MOTOR1);
+    private final PWMVictorSPX omniMotor2 = new PWMVictorSPX(Constants.OMNI_MOTOR2);
+
+    private final SpeedControllerGroup omnis = new SpeedControllerGroup(omniMotor1, omniMotor2);
+
+
+
+    private final Joystick controller = new Joystick(Constants.LEFT_JOYSTICK);
+    private final Joystick rightJoystick = new Joystick(Constants.RIGHT_JOYSTICK);
+
+    private final DifferentialDrive outsideWheels = new DifferentialDrive(leftSideWheels, rightSideWheels);
+
+
+  /** Creates a new DrivetrainSubsystem. */
+  public DrivetrainSubsystem() {}
 
   @Override
-  public void periodic()
-   {
+  public void periodic() {
     // This method will be called once per scheduler run
   }
 
-
-  /** This is the method that makes the bot go fwd. It takes the X and Y from the joystick */
-  public void driveTheBot()
+  public void leftJoystick()
   {
-    m_robotDrive.arcadeDrive(-.80 * m_action.getY(), .6 * m_stick.getX());
+    if (controller.getDirectionDegrees()>337.5&&controller.getDirectionDegrees()<22.5  || controller.getDirectionDegrees()<-202.5&&controller.getDirectionDegrees()>157.5)// make condition such that it only acceps fwd and bcwds direction
+    {
+        outsideWheels.tankDrive(controller.getY()*0.8, controller.getY()*0.8);
+    }
+
+    if (controller.getDirectionDegrees()>67.5&&controller.getDirectionDegrees()<112.5||controller.getDirectionDegrees()<292.5&&controller.getDirectionDegrees()>247.5)// make angles for degrees for just omni
+    {
+      System.out.println("only omni running");
+      omnis.set(controller.getX()*0.8);
+    
+
+    if (controller.getDirectionDegrees()<67.5&&controller.getDirectionDegrees()>22.5)// make for angles to top right diagonal
+    {
+      omnis.set(0.5);
+      outsideWheels.tankDrive(0.5, 0.5);
+    }
+
+    if (controller.getDirectionDegrees()<337.5&&controller.getDirectionDegrees()>292.5)// make for angles to top left diagonal
+    {
+      omnis.set(-0.5);
+      outsideWheels.tankDrive(0.5, 0.5);
+    }
+
+    if (controller.getDirectionDegrees()<157.5&&controller.getDirectionDegrees()>112.5)// make for angles to bottom right diagonal
+    {
+      omnis.set(0.5);
+      outsideWheels.tankDrive(-0.5, -0.5);
+    }
+
+    if (controller.getDirectionDegrees()<247.5&&controller.getDirectionDegrees()>202.5)// make for angles to bottom left diagonal
+    {
+      omnis.set(-0.5);
+      outsideWheels.tankDrive(-0.5, -0.5);
+    }
+
+  }
+}
+
+  public void rightJoystick()
+  {
+    if (rightJoystick.getX()>0.05)// make for angles so only turns right or left
+    {
+      outsideWheels.tankDrive(rightJoystick.getX()*0.8, rightJoystick.getX()*-0.8);
+    }
+
+    if (rightJoystick.getX()<-0.05)// make for angles so only turns right or left
+    {
+      outsideWheels.tankDrive(rightJoystick.getX()*-0.8, rightJoystick.getX()*0.8);
+    }
   }
 
 
-  /** This method stops the bot by stopping all the motors */
-  public void stopDriving()
+  public void stopTheBot()
   {
-    m_robotDrive.stopMotor();
+    outsideWheels.stopMotor();
   }
+  
 
-
-  /**  This method drives the robot forward 
-   * This can be called by the autonomous routine
-  */
-  public void autoDrive()
-  {
-    m_robotDrive.tankDrive(.8, .8);
-  }
 
 }
