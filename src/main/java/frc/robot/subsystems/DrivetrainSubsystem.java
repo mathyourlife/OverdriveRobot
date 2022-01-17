@@ -102,6 +102,11 @@ public class DrivetrainSubsystem extends SubsystemBase
     }
   }
 
+  public void driveTheBot()
+  {
+    leftJoystick();
+    rightJoystick();
+  }
 
   public void stopTheBot()
   {
