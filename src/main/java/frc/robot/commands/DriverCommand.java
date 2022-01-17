@@ -8,19 +8,19 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 // remember that a command needs a subsystem ALWAYS
-import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.MyDriveTrain;
 
-public class TeleopDriveCmd extends CommandBase 
+public class DriverCommand extends CommandBase 
 {
 
-   private static DrivetrainSubsystem teleopDrive ;
+   private static MyDriveTrain my_driveTrain ;
   
   /** Creates a new DriverCommand. The constructor takes the subsystem */
-  public TeleopDriveCmd(DrivetrainSubsystem drvTrain) 
+  public DriverCommand(MyDriveTrain drvTrain) 
   {
     // Use addRequirements() here to declare subsystem dependencies.
-    teleopDrive = drvTrain;
-    addRequirements(teleopDrive);
+    my_driveTrain = drvTrain;
+    addRequirements(my_driveTrain);
   }
 
   // Called when the command is initially scheduled.
@@ -36,7 +36,7 @@ public class TeleopDriveCmd extends CommandBase
   @Override
   public void execute() 
   {
-    teleopDrive.driveTheBot();
+     my_driveTrain.driveTheBot();
   }
 
   // Called once the command ends or is interrupted.

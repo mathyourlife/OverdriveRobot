@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 
   
-public class DrivetrainSubsystem extends SubsystemBase
+public class MyDriveTrain extends SubsystemBase
  {
 
   // in our robot we have two motors on left
@@ -37,7 +37,7 @@ public class DrivetrainSubsystem extends SubsystemBase
   // Sets Drive joystick port
 
   /** Creates a new MyDriveTrain. */
-  public DrivetrainSubsystem() 
+  public MyDriveTrain() 
   {
 
   }

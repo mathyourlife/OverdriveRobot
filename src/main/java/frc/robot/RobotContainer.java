@@ -3,19 +3,14 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-// import frc.robot.commands.AutoDriveCommand;
-import frc.robot.commands.TeleopDriveCmd;
+import frc.robot.commands.AutoDriveCommand;
+import frc.robot.commands.DriverCommand;
 import frc.robot.commands.shootCommand;
-import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.MyDriveTrain;
 import frc.robot.subsystems.ShooterSubsystem;
-// import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.stopShoot;
-
-// added imports
-// import edu.wpi.first.wpilibj.Joystick;
-// import frc.robot.subsystems.DrivetrainSubsystem;
-// import frc.robot.commands.TeleopDriveCmd;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -27,9 +22,9 @@ public class RobotContainer
 {
   // The robot's subsystems and commands are defined here...
   
-  private final DrivetrainSubsystem drvTrain = new DrivetrainSubsystem();
-  private final TeleopDriveCmd teleop = new TeleopDriveCmd(drvTrain);
-
+  private final MyDriveTrain dt = new MyDriveTrain();
+  private final DriverCommand dCmd = new DriverCommand(dt);
+  private final AutoDriveCommand dAutoCmd = new AutoDriveCommand(dt);
   
   private final ShooterSubsystem shooterSubSys = new ShooterSubsystem();
   private final shootCommand shoot = new shootCommand(shooterSubSys);
@@ -40,7 +35,7 @@ public class RobotContainer
   public RobotContainer() 
   {
     // this is the defaut command and is always scheduled if nothing else is using the same sub system
-    drvTrain.setDefaultCommand(teleop);
+    dt.setDefaultCommand(dCmd);
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -66,9 +61,9 @@ public class RobotContainer
    *
    * @return the command to run in autonomous
    */
-  // public Command getAutonomousCommand()
-  //  {
-  //   // Command will run in autonomous
-  //   // return m_autoCommand;
-  // }
+  public Command getAutonomousCommand()
+   {
+    // Command will run in autonomous
+    return dAutoCmd;
+  }
 }
