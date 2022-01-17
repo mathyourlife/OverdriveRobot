@@ -12,6 +12,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.stopShoot;
 
+// added imports
+import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.commands.TeleopDriveCmd;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -22,9 +27,9 @@ public class RobotContainer
 {
   // The robot's subsystems and commands are defined here...
   
-  private final MyDriveTrain dt = new MyDriveTrain();
-  private final DriverCommand dCmd = new DriverCommand(dt);
-  private final AutoDriveCommand dAutoCmd = new AutoDriveCommand(dt);
+  private final DrivetrainSubsystem drvTrain = new DrivetrainSubsystem();
+  private final TeleopDriveCmd teleop = new TeleopDriveCmd(drvTrain);
+
   
   private final ShooterSubsystem shooterSubSys = new ShooterSubsystem();
   private final shootCommand shoot = new shootCommand(shooterSubSys);
@@ -35,7 +40,7 @@ public class RobotContainer
   public RobotContainer() 
   {
     // this is the defaut command and is always scheduled if nothing else is using the same sub system
-    dt.setDefaultCommand(dCmd);
+    drvTrain.setDefaultCommand(teleop);
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -64,6 +69,6 @@ public class RobotContainer
   public Command getAutonomousCommand()
    {
     // Command will run in autonomous
-    return dAutoCmd;
+    return m_autoCommand;
   }
 }
