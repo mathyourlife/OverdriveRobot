@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.DriverCommand;
 import frc.robot.commands.shootCommand;
-import frc.robot.subsystems.MyDriveTrain;
+import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
