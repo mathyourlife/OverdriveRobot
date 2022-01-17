@@ -18,18 +18,18 @@ public class DrivetrainSubsystem extends SubsystemBase
  {
 
 
-    private final PWMVictorSPX topRightMotor = new PWMVictorSPX(Constants.TOP_RT_MOTOR);
-    private final PWMVictorSPX bottomRightMotor = new PWMVictorSPX(Constants.BOTTOM_RT_MOTOR);
+    private final PWMVictorSPX topRightMotor = new PWMVictorSPX(0);
+    private final PWMVictorSPX bottomRightMotor = new PWMVictorSPX(1);
 
     private final SpeedControllerGroup rightSideWheels = new SpeedControllerGroup(topRightMotor, bottomRightMotor);
 
-    private final PWMVictorSPX topLeftMotor = new PWMVictorSPX(Constants.TOP_LFT_MOTOR);
-    private final PWMVictorSPX bottomLeftMotor = new PWMVictorSPX(Constants.BOTTOM_LFT_MOTOR);
+    private final PWMVictorSPX topLeftMotor = new PWMVictorSPX(2);
+    private final PWMVictorSPX bottomLeftMotor = new PWMVictorSPX(3);
 
     private final SpeedControllerGroup leftSideWheels = new SpeedControllerGroup(topLeftMotor, bottomLeftMotor);
 
-    private final PWMVictorSPX omniMotor1 = new PWMVictorSPX(Constants.OMNI_MOTOR1);
-    private final PWMVictorSPX omniMotor2 = new PWMVictorSPX(Constants.OMNI_MOTOR2);
+    private final PWMVictorSPX omniMotor1 = new PWMVictorSPX(6);
+    private final PWMVictorSPX omniMotor2 = new PWMVictorSPX(7);
 
     private final SpeedControllerGroup omnis = new SpeedControllerGroup(omniMotor1, omniMotor2);
 
