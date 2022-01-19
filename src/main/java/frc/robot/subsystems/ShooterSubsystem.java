@@ -30,18 +30,14 @@ public class ShooterSubsystem extends SubsystemBase {
     // import a joystick
     shooterLeft.setInverted(true);
     // invert a motor to spin same direction
-    shooterGroup.set(m_joystick.getY());;
+    if (m_joystick.getY() > 0){
+      shooterGroup.set(0);
+    } else {
+      shooterGroup.set(m_joystick.getY());
+    }
+    
     // associate motor speed with joystick Y-axis
   }
-  
-   public void forwordShoot () {
-     
-     if (m_joystick.getY() < 0){
-       shooterGroup.set(0);
-     } else{
-       shooterGroup.set(m_joystick.getY());;
-   }
-   }
   public void stopShoot () {
     shooterGroup.set(0);
     // Stop shooter group
