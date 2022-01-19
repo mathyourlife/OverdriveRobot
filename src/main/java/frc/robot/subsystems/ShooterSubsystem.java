@@ -39,7 +39,7 @@ public class ShooterSubsystem extends SubsystemBase {
      if (m_joystick<0){
        shooterGroup.set(0);
      } else{
-       shooterGroup.set(m_Joystick.getY());;
+       shooterGroup.set(m_joystick.getY());;
    }
    }
   public void stopShoot () {
