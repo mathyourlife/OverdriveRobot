@@ -33,6 +33,15 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterGroup.set(m_joystick.getY());;
     // associate motor speed with joystick Y-axis
   }
+  
+   public void forwordShoot () {
+     
+     if (m_joystick<0){
+       shooterGroup.set(0);
+     } else{
+       shooterGroup.set(m_Joystick.getY());;
+   }
+   }
   public void stopShoot () {
     shooterGroup.set(0);
     // Stop shooter group
