@@ -36,7 +36,7 @@ public class ShooterSubsystem extends SubsystemBase {
   
    public void forwordShoot () {
      
-     if (m_joystick<0){
+     if (m_joystick.getY() < 0){
        shooterGroup.set(0);
      } else{
        shooterGroup.set(m_joystick.getY());;
