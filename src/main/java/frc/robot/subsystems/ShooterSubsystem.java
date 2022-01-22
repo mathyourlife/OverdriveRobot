@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class ShooterSubsystem extends SubsystemBase {
   PWMVictorSPX shooterRight = new PWMVictorSPX(4);
   PWMVictorSPX shooterLeft = new PWMVictorSPX(5);
 
-  SpeedControllerGroup shooterGroup = new SpeedControllerGroup(shooterLeft, shooterRight);
+  MotorControllerGroup shooterGroup = new MotorControllerGroup(shooterLeft, shooterRight);
   // Assign a motors to a group
 
   private static final int kJoystickPort = 1;

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 
@@ -22,12 +22,12 @@ public class MyDriveTrain extends SubsystemBase
   // in our robot we have two motors on left
   private final PWMVictorSPX m_left1 = new PWMVictorSPX(0);
   private final PWMVictorSPX m_left2 = new PWMVictorSPX(1);
-  SpeedControllerGroup m_left = new SpeedControllerGroup(m_left1, m_left2);
+  MotorControllerGroup m_left = new MotorControllerGroup(m_left1, m_left2);
 
   // in our robot we have two motors on right
   private final PWMVictorSPX m_right1 = new PWMVictorSPX(2);
   private final PWMVictorSPX m_right2 = new PWMVictorSPX(3);
-  SpeedControllerGroup m_right = new SpeedControllerGroup(m_right1, m_right2);
+  MotorControllerGroup m_right = new MotorControllerGroup(m_right1, m_right2);
 
   // we use diffrential drive
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_left, m_right);
